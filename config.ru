@@ -1,2 +1,2 @@
-require './best-guitar'
+require './app'
 run Sinatra::Application
