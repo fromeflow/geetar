@@ -3,5 +3,10 @@
   %input{type: 'submit'}
 
 some results
-%p
-  = search_results
+
+%table
+  %tbody
+    - search_results.each do |result|
+      %tr
+        %td
+          = result.title

@@ -8,11 +8,30 @@ BASE_URL = 'https://www.ultimate-guitar.com/search.php'
 class Scraper
 
   def initialize(query)
-    @page = Nokogiri::HTML( open("#{BASE_URL}?search_type=title&value=#{query})", 'User-Agent' => 'firefox') )
+    page_url = "#{BASE_URL}?search_type=title&value=#{query})"
+    @page = Nokogiri::HTML( open(page_url, 'User-Agent' => 'firefox') )
   end
 
   def results
-    @page.css('.tresults')
+    rows = @page.css('.tresults').css('tr')
+    # Drop the header row
+    rows = rows.drop(1)
+    result_rows = rows.map do |row|
+      Result.new(row)
+    end
+    return result_rows
+  end
+
+end
+
+class Result
+
+  def initialize(row)
+    @row = row
+  end
+
+  def title
+    @row.css('td')[1].css('a').first.text
   end
 
 end
