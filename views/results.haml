@@ -1,0 +1,16 @@
+%form{action: '/results', method: 'post'}
+  %input{type: 'text', name: 'query', value: params[:query]}
+  %input{type: 'submit'}
+
+Search Results:
+
+%table
+  %tbody
+    - search_results.each do |result|
+      %tr
+        %td
+          = result.artist
+        %td
+          %a{ href: "/show?url=#{result.title[:href]}" }= result.title[:text]
+        %td
+          = result.item_type
