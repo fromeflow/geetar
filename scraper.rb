@@ -16,7 +16,6 @@ class Scraper
     rows = @page.css('.tresults').css('tr')
     # Drop the header row
     rows = rows.drop(1)
-    binding.pry
     result_rows = rows.map do |row|
       Result.new(row)
     end
@@ -38,6 +37,10 @@ class Result
   def item_type
     # Chords or tab
     @row.css('td')[3].text
+  end
+
+  def artist
+    @row.css('td')[0].text
   end
 
 end
