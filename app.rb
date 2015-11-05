@@ -9,6 +9,6 @@ get '/' do
 end
 
 post '/results' do
-  scraper = Scraper.new(params[:query])
-  haml :results, locals: {search_results: scraper.results}
+  search = Search.new(params[:query])
+  haml :results, locals: {search_results: search.results}
 end

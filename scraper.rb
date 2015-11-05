@@ -5,15 +5,24 @@ require 'pry'
 
 BASE_URL = 'https://www.ultimate-guitar.com/search.php'
 
-class Scraper
+module Scraper
+
+  def get_page(page_url)
+    Nokogiri::HTML( open(page_url, 'User-Agent' => 'firefox') )
+  end
+
+end
+
+class Search
+  include Scraper
 
   def initialize(query)
     page_url = "#{BASE_URL}?search_type=title&value=#{query})"
-    @page = Nokogiri::HTML( open(page_url, 'User-Agent' => 'firefox') )
+    @output = self.get_page(page_url)
   end
 
   def results
-    rows = @page.css('.tresults').css('tr')
+    rows = @output.css('.tresults').css('tr')
     # Drop the header row
     rows = rows.drop(1)
     result_rows = rows.map do |row|
