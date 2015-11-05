@@ -31,7 +31,8 @@ class Result
   end
 
   def title
-    @row.css('td')[1].css('a').first.text
+    title = @row.css('td')[1].css('a').first
+    { text: title.text, href: title[:href] }
   end
 
   def item_type
