@@ -5,6 +5,9 @@ require 'pry'
 require_relative 'scraper.rb'
 
 get '/' do
-  page = Scraper.new
-  page.page_title
+  haml :scraper
+end
+
+post '/results' do
+  haml :results
 end
