@@ -5,7 +5,7 @@ require 'pry'
 require_relative 'scraper.rb'
 
 get '/' do
-  haml :scraper
+  haml :index
 end
 
 post '/results' do
