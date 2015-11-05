@@ -36,23 +36,18 @@ class Search
 end
 
 class Result
+  attr_accessor :artist, :item_type
 
   def initialize(row)
     @row = row
+    @artist = @row.css('td')[0].text
+    # Chords or tab
+    @item_type = @row.css('td')[3].text
   end
 
   def title
     title = @row.css('td')[1].css('a').first
     { text: title.text, href: title[:href] }
-  end
-
-  def item_type
-    # Chords or tab
-    @row.css('td')[3].text
-  end
-
-  def artist
-    @row.css('td')[0].text
   end
 
 end
