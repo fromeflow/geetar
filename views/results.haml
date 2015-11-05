@@ -11,6 +11,6 @@ some results
         %td
           = result.artist
         %td
-          %a{ href: result.title[:href] }= result.title[:text]
+          %a{ href: "/show?url=#{result.title[:href]}" }= result.title[:text]
         %td
           = result.item_type

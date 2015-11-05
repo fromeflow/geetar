@@ -54,3 +54,16 @@ class Result
   end
 
 end
+
+class Tab
+  include Scraper
+
+  def initialize(tab_url)
+    @output = self.get_page(tab_url)
+  end
+
+  def content
+    @output.css('#cont').css('pre')[2].to_s
+  end
+
+end
