@@ -15,5 +15,5 @@ end
 
 get '/show' do
   tab = Tab.new( params[:url] )
-  haml :show, locals: {tab: tab}
+  haml :show, locals: {tab: tab}, layout: false
 end
