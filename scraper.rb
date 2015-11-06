@@ -1,7 +1,5 @@
-require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
 require 'cgi'
 
 BASE_URL = 'https://www.ultimate-guitar.com/search.php'
