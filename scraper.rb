@@ -27,10 +27,26 @@ class Search
     rows = @output.css('.tresults').css('tr')
     # Drop the header row
     rows = rows.drop(1)
-    result_rows = rows.map do |row|
+    rows.map! do |row|
       Result.new(row)
     end
-    return result_rows
+
+    # Add artists to each result
+    artist = ''
+    rows.each do |row|
+      if row.artist != "\u00A0"
+        artist = row.artist
+      else
+        row.artist = artist
+      end
+    end
+
+    # Remove non-text (fake) tabs
+    rows.reject! do |row|
+      row.item_type.match /(pro|power|video)/i
+    end
+
+    return rows
   end
 
 end
@@ -40,9 +56,9 @@ class Result
 
   def initialize(row)
     @row = row
-    @artist = @row.css('td')[0].text
+    @artist = @row.css('td')[0].text.strip
     # Chords or tab
-    @item_type = @row.css('td')[3].text
+    @item_type = @row.css('td')[3].text.strip
   end
 
   def title
