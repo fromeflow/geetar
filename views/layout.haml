@@ -3,9 +3,6 @@
     %title
       Best Guitar
     %meta{name: 'viewport', content: 'width=device-width, initial-scale=1.0'}
-= 'Search Ultimate Guitar by song title:'
-%form{action: '/results', method: 'post'}
-  %input{type: 'text', name: 'query', value: params[:query]}
-  %input{type: 'submit'}
+
 %p
   = yield
