@@ -48,7 +48,6 @@ class Search
 
     return rows
   end
-
 end
 
 class Result
