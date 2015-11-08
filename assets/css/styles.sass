@@ -1,9 +1,9 @@
 $tabletQuery: 'screen and (max-width: 800px)'
 $phoneQuery: 'screen and (max-width: 500px)'
 
-$stdMargin: 0 10em
-$phoneMargin: 0 0.5em
-$tabletMargin: 0 2.5em
+$stdMargin: 10em
+$phoneMargin: 0.5em
+$tabletMargin: 2.5em
 
 $color1: #F4A460 //sandy brown
 $color2: #B2E0E6 // powder blue
@@ -19,15 +19,16 @@ body
   font-weight: 100
   letter-spacing: 0.01em
 
-  margin: $stdMargin
-  @media #{$tabletQuery}
-    margin: $tabletMargin
-  @media #{$phoneQuery}
-    margin: $phoneMargin
+  .main
+    margin: 0 $stdMargin
+    @media #{$tabletQuery}
+      margin: 0 $tabletMargin
+    @media #{$phoneQuery}
+      margin: 0 $phoneMargin
 
   // http://callmenick.com/post/various-css-input-text-styles
   input[type="text"]
-    display: block
+    display: inline-block
     margin: 0
     width: 100%
     font-size: 1em
@@ -50,12 +51,35 @@ body
     font-weight: 600
     letter-spacing: .5
     font-size: 1em
-    padding: .5em 1em
-    margin-top: 1.5em
+    padding: .75em 1em
   input[type="submit"]:hover
     background-color: $lighterGray
     color: $black
-    border: 1px solid $gray
+
+  .results-search
+    form.search
+      display: table
+      width: 100%
+    .search-box
+      display: table-cell
+      width: 100%
+    input[type="submit"]
+      margin: 0 $stdMargin 0 .5em
+      @media #{$tabletQuery}
+        margin-right: $tabletMargin
+      @media #{$phoneQuery}
+        margin-right: $phoneMargin
+    .logo
+      width: 4em
+      font-size: 2em
+      text-align: right
+      padding-right: 1em
+      @media #{$tabletQuery}
+        width: $tabletMargin
+      @media #{$phoneQuery}
+        display: none
+      a
+        text-decoration: none
 
 
   .logo
@@ -71,3 +95,13 @@ body
       margin-bottom: 0.25em
     .tagline
       margin-bottom: 1.5em
+    div.logo
+      display: none
+
+    input[type="text"]
+      display: block
+      width: 100%
+
+    input[type="submit"]
+      margin-top: 1.5em
+      padding: .5em 1em

@@ -1,3 +1,8 @@
-%form{action: '/results', method: 'post'}
-  %input{type: 'text', name: 'query', value: params[:query]}
-  %input{value: 'Search', type: 'submit'}
+%form{class: 'search', action: '/results', method: 'post'}
+  .logo
+    %a{href: '/'}
+      <span class='orange'>gee</span><span class='blue'>tar</span>
+  .search-box
+    %input{type: 'text', name: 'query', value: params[:query]}
+  .search-button
+    %input{value: 'Search', type: 'submit'}
