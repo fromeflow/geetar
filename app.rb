@@ -1,7 +1,5 @@
-require 'rubygems'
 require 'sinatra'
-require 'haml'
-require 'pry'
+
 require_relative 'scraper.rb'
 
 get '/' do
@@ -15,5 +13,5 @@ end
 
 get '/show' do
   tab = Tab.new( params[:url] )
-  haml :show, locals: {tab: tab}
+  haml :show, locals: {tab: tab}, layout: false
 end
