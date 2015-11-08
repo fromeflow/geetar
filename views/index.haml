@@ -1,11 +1,6 @@
-%p
-  This app scrapes ultimate-guitar.com and displays the tabs without the ads. Enter a search term to get started.
-
-= haml :_search
-
-%p
-  You're welcome.
-
-%p
-  by
-  %a{href: 'https://github.com/jpalmieri'}= "Joe Palmieri"
+.splash-container
+  %h1.logo
+    <span class='orange'>gee</span><span class='blue'>tar</span>
+  .tagline
+    no bullshit tab search
+  = haml :_search
