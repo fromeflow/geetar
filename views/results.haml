@@ -3,13 +3,11 @@
 
 .main
 
-  %table
-    %tbody
-      - search_results.each do |result|
-        %tr
-          %td
-            = result.artist
-          %td
-            %a{ href: "/show?url=#{result.title[:href]}" }= result.title[:text]
-          %td
-            = result.item_type
+  - search_results.each do |result|
+    .item
+      .title
+        %a{ href: "/show?url=#{result.title[:href]}" }= result.title[:text]
+      .artist
+        = " by #{result.artist}"
+      .type
+        = result.item_type
