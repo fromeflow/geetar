@@ -31,14 +31,11 @@ class Search
   def add_artist!(rows)
     # This hack makes up for many of the artist cells being blank on
     # UG's search results (since UG groups the results by artist)
-    artist = ''
-    rows.each do |row|
-      if row.artist != "\u00A0"
-        artist = row.artist
-      else
-        row.artist = artist
-      end
+    artist_name = ''
+    rows.each do |r|
+      r.artist == "\u00A0" ? r.artist = artist_name : artist_name = r.artist
     end
+
     return self
   end
 
