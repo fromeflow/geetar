@@ -5,11 +5,9 @@ require 'cgi'
 BASE_URL = 'https://www.ultimate-guitar.com/search.php'
 
 module Scraper
-
   def get_page(page_url)
     Nokogiri::HTML( open(page_url, 'User-Agent' => 'firefox') )
   end
-
 end
 
 class Search
@@ -22,29 +20,27 @@ class Search
   end
 
   def results
-    rows = @output.css('.tresults').css('tr')
-    # Drop the header row
-    rows = rows.drop(1)
-    rows.map! do |row|
-      Result.new(row)
+    rows = @output.css('.tresults').css('tr').drop(1)
+    rows.map! { |row| Result.new(row) }
+    add_artist!(rows)
+    reject_fake_tabs!(rows)
+  end
+
+  private
+
+  def add_artist!(rows)
+    # This hack makes up for many of the artist cells being blank on
+    # UG's search results (since UG groups the results by artist)
+    artist_name = ''
+    rows.each do |r|
+      r.artist == "\u00A0" ? r.artist = artist_name : artist_name = r.artist
     end
 
-    # Add artists to each result
-    artist = ''
-    rows.each do |row|
-      if row.artist != "\u00A0"
-        artist = row.artist
-      else
-        row.artist = artist
-      end
-    end
+    return self
+  end
 
-    # Remove non-text (fake) tabs
-    rows.reject! do |row|
-      row.item_type.match /(pro|power|video)/i
-    end
-
-    return rows
+  def reject_fake_tabs!(rows)
+    rows.reject! {|r| r.item_type.match /(pro|power|video)/i}
   end
 end
 
@@ -75,5 +71,4 @@ class Tab
   def content
     @output.css('#cont').css('pre')[2].to_s
   end
-
 end
