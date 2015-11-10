@@ -2,9 +2,9 @@ require 'nokogiri'
 require 'open-uri'
 require 'cgi'
 
-BASE_URL = 'https://www.ultimate-guitar.com/search.php'
-
 module Scraper
+  BASE_URL = 'https://www.ultimate-guitar.com/search.php'
+
   def get_page(page_url)
     Nokogiri::HTML( open(page_url, 'User-Agent' => 'firefox') )
   end
