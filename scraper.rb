@@ -13,9 +13,9 @@ end
 class Search
   include Scraper
 
-  def initialize(query)
-    query_string = CGI::escape(query)
-    page_url = "#{BASE_URL}?search_type=title&value=#{query_string})"
+  def initialize(query, page)
+    @query_string = CGI::escape(query)
+    page_url = "#{BASE_URL}?search_type=title&value=#{@query_string}&page=#{page}"
     @output = self.get_page(page_url)
   end
 
@@ -24,6 +24,19 @@ class Search
     rows.map! { |row| Result.new(row) }
     add_artist!(rows)
     reject_fake_tabs!(rows)
+  end
+
+  def page_links
+    page_anchors = @output.css('.paging').css('b, a')
+
+    page_anchors.map do |p|
+      if p.name == 'a'
+        page_number = p[:href].match(/&page=\d*/).to_s
+        p[:href] = "/results?query=#{@query_string}#{page_number}"
+      end
+    end
+
+    page_anchors
   end
 
   private
