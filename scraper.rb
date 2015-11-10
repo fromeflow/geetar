@@ -34,8 +34,12 @@ class Search
         page_number = p[:href].match(/&page=\d*/).to_s
         p[:href] = "/results?query=#{@query_string}#{page_number}"
       end
-    end
 
+      if p.text.match /(next|prev)/i
+        p.text.strip
+        p.children.css('img').remove
+      end
+    end
     page_anchors
   end
 
