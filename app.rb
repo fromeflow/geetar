@@ -6,7 +6,7 @@ get '/' do
   haml :index
 end
 
-post '/results' do
+get '/results' do
   search = Search.new(params[:query])
   haml :results, locals: {search_results: search.results}
 end
