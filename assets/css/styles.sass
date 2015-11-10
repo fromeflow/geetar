@@ -18,6 +18,10 @@ body
   font-family: sans-serif
   font-weight: 100
   letter-spacing: 0.01em
+  a
+    text-decoration: none
+  a:hover
+    text-decoration: underline
 
   .main
     margin: 0 $stdMargin
@@ -25,6 +29,11 @@ body
       margin: 0 $tabletMargin
     @media #{$phoneQuery}
       margin: 0 $phoneMargin
+
+    .page_links
+      font-size: 1.5em
+      *
+        padding-right: 1.5%
 
   // http://callmenick.com/post/various-css-input-text-styles
   input[type="text"]
@@ -78,9 +87,6 @@ body
         width: $tabletMargin
       @media #{$phoneQuery}
         display: none
-      a
-        text-decoration: none
-
 
   .logo, .small-logo
     .orange
@@ -113,10 +119,6 @@ body
       .title
         font-size: 1.5em
         margin-bottom: 0.25em
-        a
-          text-decoration: none
-        a:hover
-          text-decoration: underline
       .artist
         font-size: 1.25em
         margin-bottom: 0.25em
