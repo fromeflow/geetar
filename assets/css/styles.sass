@@ -1,7 +1,6 @@
-$tabletQuery: 'screen and (max-width: 800px)'
-$phoneQuery: 'screen and (max-width: 500px)'
+$phoneQuery: 'screen and (max-width: 750px)'
 
-$stdMargin: 10em
+$stdMargin: 8.5em
 $phoneMargin: 0.5em
 $tabletMargin: 2.5em
 
@@ -25,8 +24,6 @@ body
 
   .main
     margin: 0 $stdMargin
-    @media #{$tabletQuery}
-      margin: 0 $tabletMargin
     @media #{$phoneQuery}
       margin: 0 $phoneMargin
 
@@ -68,25 +65,24 @@ body
   .results-search
     form.search
       display: table
-      width: 100%
     .search-box
       display: table-cell
-      width: 100%
+      width: 30em
+      @media #{$phoneQuery}
+        width: 100%
     input[type="submit"]
-      margin: 0 $stdMargin 0 .5em
-      @media #{$tabletQuery}
-        margin-right: $tabletMargin
+      margin: 0 0 0 .5em
       @media #{$phoneQuery}
         margin-right: $phoneMargin
     .small-logo
-      width: 4em
+      width: 3.5em
       font-size: 2em
       text-align: right
-      padding-right: 1em
-      @media #{$tabletQuery}
-        width: $tabletMargin
+      padding-right: 0.75em
       @media #{$phoneQuery}
         display: none
+      a:hover
+        text-decoration: none
 
   .logo, .small-logo
     .orange
@@ -107,6 +103,8 @@ body
     input[type="text"]
       display: block
       width: 100%
+      max-width: 600px
+      margin: 0 auto
 
     input[type="submit"]
       margin-top: 1.5em
